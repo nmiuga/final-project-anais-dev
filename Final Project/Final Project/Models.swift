@@ -32,14 +32,16 @@ struct Task: Identifiable, Codable {
     var priority: TaskPriority
     var isCompleted: Bool
     var description: String
+    var dueDate: Date?
     
-    init(id: UUID = UUID(), title: String, category: TaskCategory, priority: TaskPriority, isCompleted: Bool = false, description: String = "") {
+    init(id: UUID = UUID(), title: String, category: TaskCategory, priority: TaskPriority, isCompleted: Bool = false, description: String = "", dueDate: Date? = nil) {
         self.id = id
         self.title = title
         self.category = category
         self.priority = priority
         self.isCompleted = isCompleted
         self.description = description
+        self.dueDate = dueDate
     }
 }
 

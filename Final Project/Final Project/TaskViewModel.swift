@@ -24,8 +24,8 @@ class TaskViewModel: ObservableObject {
     }
     
     // MARK: - Task Operations
-    func addTask(title: String, description: String, category: TaskCategory, priority: TaskPriority) {
-        let task = Task(title: title, category: category, priority: priority, description: description)
+    func addTask(title: String, description: String, category: TaskCategory, priority: TaskPriority, dueDate: Date? = nil) {
+        let task = Task(title: title, category: category, priority: priority, description: description, dueDate: dueDate)
         tasks.append(task)
         saveTasks()
     }
@@ -38,13 +38,15 @@ class TaskViewModel: ObservableObject {
     ///   - category: The new category for the task.
     ///   - priority: The new priority for the task.
     ///   - isCompleted: The new completion status for the task.
-    func editTask(id: UUID, title: String, description: String, category: TaskCategory, priority: TaskPriority, isCompleted: Bool) {
+    ///   - dueDate: The new due date for the task.
+    func editTask(id: UUID, title: String, description: String, category: TaskCategory, priority: TaskPriority, isCompleted: Bool, dueDate: Date?) {
         if let index = tasks.firstIndex(where: { $0.id == id }) {
             tasks[index].title = title
             tasks[index].description = description
             tasks[index].category = category
             tasks[index].priority = priority
             tasks[index].isCompleted = isCompleted
+            tasks[index].dueDate = dueDate
             saveTasks()
         }
     }

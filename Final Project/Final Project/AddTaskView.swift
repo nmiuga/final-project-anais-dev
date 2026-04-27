@@ -12,6 +12,8 @@ struct AddTaskView: View {
     @State private var selectedCategory: TaskCategory?
     @State private var selectedPriority: TaskPriority = .medium
     @State private var newCategoryName: String = ""
+    @State private var hasDueDate: Bool = false
+    @State private var dueDate: Date = Date()
     @FocusState private var focusCategoryField: Bool
     
     var body: some View {
@@ -53,6 +55,12 @@ struct AddTaskView: View {
                     }
                     .pickerStyle(.segmented)
                 }
+                Section(header: Text("Due")) {
+                    Toggle("Set due date", isOn: $hasDueDate)
+                    if hasDueDate {
+                        DatePicker("Date & Time", selection: $dueDate, displayedComponents: [.date, .hourAndMinute])
+                    }
+                }
             }
             .navigationTitle("Add Task")
             .toolbar {
@@ -62,7 +70,7 @@ struct AddTaskView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         if let cat = selectedCategory ?? viewModel.categories.first {
-                            viewModel.addTask(title: title, description: description, category: cat, priority: selectedPriority)
+                            viewModel.addTask(title: title, description: description, category: cat, priority: selectedPriority, dueDate: hasDueDate ? dueDate : nil)
                             dismiss()
                         }
                     }
@@ -78,6 +86,8 @@ struct AddTaskView: View {
                 description = ""
                 selectedPriority = .medium
                 newCategoryName = ""
+                hasDueDate = false
+                dueDate = Date()
                 selectedCategory = viewModel.categories.first
             }
         }

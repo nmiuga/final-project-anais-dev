@@ -69,7 +69,7 @@ struct EditTaskView: View {
                             description: description,
                             category: selectedCategory,
                             priority: selectedPriority,
-                            isCompleted: isCompleted
+                            isCompleted: isCompleted, dueDate: <#Date?#>
                         )
                         dismiss()
                     }
