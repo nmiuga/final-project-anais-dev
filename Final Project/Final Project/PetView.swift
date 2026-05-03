@@ -10,9 +10,7 @@ struct PetView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: 120)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
+                .clipped()
 
             // Hunger progress bar with label
             ProgressView("Hunger", value: petViewModel.hungerProgress)
