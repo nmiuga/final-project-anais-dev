@@ -23,7 +23,10 @@ struct TaskListView: View {
                                 Button(action: {
                                     let wasCompleted = task.isCompleted
                                     viewModel.toggleTaskCompleted(task)
-                                    if !wasCompleted { petViewModel.feedPet() }
+                                    // If we just marked it complete, feed the pet according to priority
+                                    if !wasCompleted {
+                                        petViewModel.feed(for: task.priority)
+                                    }
                                 }) {
                                     Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                                         .foregroundStyle(task.isCompleted ? .green : .secondary)

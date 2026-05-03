@@ -18,13 +18,13 @@ struct PetView: View {
             ProgressView("Hunger", value: petViewModel.hungerProgress)
                 .padding(.horizontal)
 
-            // Feed button triggering feedPet action
-            Button("Feed") {
-                petViewModel.feedPet()
+            Button {
+                petViewModel.resetHunger()
+            } label: {
+                Label("Reset Hunger", systemImage: "arrow.counterclockwise")
             }
-            .buttonStyle(.bordered)
-            .tint(.green)
-            .controlSize(.small)
+            .buttonStyle(.borderedProminent)
+            .tint(.red)
         }
         .padding()
     }
