@@ -69,7 +69,7 @@ struct EditTaskView: View {
                             description: description,
                             category: selectedCategory,
                             priority: selectedPriority,
-                            isCompleted: isCompleted, dueDate: <#Date?#>
+                            isCompleted: isCompleted, dueDate: task.dueDate
                         )
                         dismiss()
                     }
@@ -81,3 +81,4 @@ struct EditTaskView: View {
 }
 
 // This sheet allows editing all properties of a task, using the ViewModel for saving.
+

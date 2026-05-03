@@ -66,7 +66,7 @@ class TaskViewModel: ObservableObject {
     // MARK: - Category Operations
     func addCategory(name: String) {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty, !categories.map { $0.name.lowercased() }.contains(trimmed.lowercased()) else { return }
+        guard !trimmed.isEmpty, !categories.map({ $0.name.lowercased() }).contains(trimmed.lowercased()) else { return }
         let newCat = TaskCategory(id: UUID(), name: trimmed)
         categories.append(newCat)
         saveCategories()

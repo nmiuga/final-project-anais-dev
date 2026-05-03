@@ -5,6 +5,7 @@ import SwiftUI
 
 struct TaskListView: View {
     @StateObject var viewModel = TaskViewModel()
+    @StateObject var petViewModel = PetViewModel()
     @State private var showAddTask = false
     @State private var editingTask: Task? = nil
     @State private var showManageCategories = false
@@ -12,11 +13,18 @@ struct TaskListView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section(header: Text("Your Pet")) {
+                    PetView(petViewModel: petViewModel)
+                }
                 ForEach(viewModel.groupedTasks, id: \.0.id) { category, tasks in
                     Section(header: Text(category.name).font(.headline)) {
                         ForEach(tasks) { task in
                             HStack {
-                                Button(action: { viewModel.toggleTaskCompleted(task) }) {
+                                Button(action: {
+                                    let wasCompleted = task.isCompleted
+                                    viewModel.toggleTaskCompleted(task)
+                                    if !wasCompleted { petViewModel.feedPet() }
+                                }) {
                                     Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
                                         .foregroundStyle(task.isCompleted ? .green : .secondary)
                                 }
