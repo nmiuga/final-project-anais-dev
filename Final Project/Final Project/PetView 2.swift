@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PetView: View {
+struct PetView2: View {
     @StateObject private var viewModel = PetViewModel()
 
     var body: some View {
@@ -40,5 +40,5 @@ struct PetView: View {
 }
 
 #Preview {
-    NavigationStack { PetView() }
+    NavigationStack { PetView2() }
 }
