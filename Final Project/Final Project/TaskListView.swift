@@ -16,6 +16,19 @@ struct TaskListView: View {
                 Section(header: Text("Your Pet")) {
                     PetView(petViewModel: petViewModel)
                 }
+                if viewModel.tasks.isEmpty {
+                    Section {
+                        VStack(spacing: 8) {
+                            Text("No tasks yet…")
+                                .font(.headline)
+                            Text("Tap the + button to add your first task.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 12)
+                    }
+                }
                 ForEach(viewModel.groupedTasks, id: \.0.id) { category, tasks in
                     Section(header: Text(category.name).font(.headline)) {
                         ForEach(tasks) { task in
