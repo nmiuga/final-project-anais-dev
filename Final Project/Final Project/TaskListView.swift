@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject var viewModel = TaskViewModel()
+    @EnvironmentObject var viewModel: TaskViewModel
     @StateObject var petViewModel = PetViewModel()
     @State private var showAddTask = false
     @State private var editingTask: Task? = nil

@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = TaskViewModel()
     var body: some View {
         TabView {
             TaskListView()
+                .environmentObject(viewModel)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
             ManageTasksView()
+                .environmentObject(viewModel)
                 .tabItem {
                     Label("Manage", systemImage: "list.bullet")
                 }
