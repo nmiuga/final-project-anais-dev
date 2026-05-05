@@ -62,6 +62,8 @@ struct AddTaskView: View {
                     }
                 }
             }
+            .background(Color.themeBlue.opacity(0.12))
+            .tint(.themeGreen)
             .navigationTitle("Add Task")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

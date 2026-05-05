@@ -26,7 +26,18 @@ struct ManageTasksView: View {
         NavigationStack {
             List {
                 ForEach(sortedCategories, id: \.self) { category in
-                    Section(header: Text(category.name)) {
+                    Section(header:
+                        Text(category.name)
+                            .font(.headline)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.themeBlue.opacity(0.8))
+                                    .overlay(Capsule().stroke(Color.white.opacity(0.4), lineWidth: 1))
+                            )
+                            .foregroundStyle(.white)
+                    ) {
                         let categoryTasks: [Task] = tasksFor(category: category)
                         ForEach(categoryTasks) { task in
                             TaskRowView(
@@ -39,6 +50,7 @@ struct ManageTasksView: View {
                     }
                 }
             }
+            .background(Color.themeBlue.opacity(0.12))
             .navigationTitle("Manage Tasks")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -47,6 +59,7 @@ struct ManageTasksView: View {
                     } label: {
                         Label("Categories", systemImage: "folder")
                     }
+                    .tint(.themeBlue)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -54,6 +67,7 @@ struct ManageTasksView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .tint(.themeYellow)
                 }
             }
             .sheet(isPresented: $showAddTask) {
@@ -79,7 +93,8 @@ struct TaskRowView: View {
         HStack {
             Button(action: toggle) {
                 Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .foregroundColor(task.isCompleted ? .green : .gray)
+                    .foregroundStyle(task.isCompleted ? Color.themeGreen : Color.themeBlue.opacity(0.7))
+                    .shadow(color: task.isCompleted ? Color.themeGreen.opacity(0.35) : Color.clear, radius: task.isCompleted ? 6 : 0, x: 0, y: 0)
             }
             VStack(alignment: .leading) {
                 Text(task.title)
@@ -94,15 +109,35 @@ struct TaskRowView: View {
             Spacer()
             Text(task.priority.rawValue.capitalized)
                 .font(.caption)
-                .padding(6)
-                .background(priorityColor(task.priority))
-                .foregroundColor(.white)
-                .clipShape(Capsule())
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    LinearGradient(
+                        colors: [priorityColor(task.priority).opacity(0.85), priorityColor(task.priority).opacity(0.55)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .clipShape(Capsule())
+                )
+                .overlay(
+                    Capsule().stroke(Color.white.opacity(0.35), lineWidth: 1)
+                )
+                .foregroundStyle(.white)
             Button(action: edit) {
                 Image(systemName: "pencil")
             }
             .buttonStyle(.plain)
         }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(Color.white.opacity(0.75))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                )
+        )
         .swipeActions {
             Button(role: .destructive, action: delete) {
                 Label("Delete", systemImage: "trash")
@@ -114,11 +149,11 @@ struct TaskRowView: View {
 fileprivate func priorityColor(_ priority: TaskPriority) -> Color {
     switch priority {
     case .low:
-        return .blue
+        return .themeBlue
     case .medium:
-        return .orange
+        return .themeGreen
     case .high:
-        return .red
+        return .themeYellow
     }
 }
 

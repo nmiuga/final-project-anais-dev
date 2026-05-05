@@ -56,6 +56,8 @@ struct EditTaskView: View {
                     Toggle("Completed", isOn: $isCompleted)
                 }
             }
+            .background(Color.themeBlue.opacity(0.12))
+            .tint(.themeGreen)
             .navigationTitle("Edit Task")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

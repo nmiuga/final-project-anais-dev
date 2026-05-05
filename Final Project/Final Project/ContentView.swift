@@ -10,17 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = TaskViewModel()
     var body: some View {
-        TabView {
-            TaskListView()
-                .environmentObject(viewModel)
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-            ManageTasksView()
-                .environmentObject(viewModel)
-                .tabItem {
-                    Label("Manage", systemImage: "list.bullet")
-                }
+        ZStack {
+            Color.themeBlue.opacity(0.18).ignoresSafeArea()
+            TabView {
+                TaskListView()
+                    .environmentObject(viewModel)
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                ManageTasksView()
+                    .environmentObject(viewModel)
+                    .tabItem {
+                        Label("Manage", systemImage: "list.bullet")
+                    }
+            }
+            .tint(.themeGreen)
         }
     }
 }
