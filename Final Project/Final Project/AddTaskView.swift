@@ -62,9 +62,12 @@ struct AddTaskView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.themeBlue)
             .background(Color.themeBlue.opacity(0.12))
             .tint(.themeGreen)
             .navigationTitle("Add Task")
+            .background(Color.themeBlue)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
@@ -93,6 +96,7 @@ struct AddTaskView: View {
                 selectedCategory = viewModel.categories.first
             }
         }
+        .background(Color.themeBlue)
     }
 }
 

@@ -11,7 +11,7 @@ struct ContentView: View {
     @StateObject private var viewModel = TaskViewModel()
     var body: some View {
         ZStack {
-            Color.themeBlue.opacity(0.18).ignoresSafeArea()
+            Color.themeBlue.ignoresSafeArea()
             TabView {
                 TaskListView()
                     .environmentObject(viewModel)

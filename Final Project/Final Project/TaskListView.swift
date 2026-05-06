@@ -124,9 +124,17 @@ struct TaskListView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(Color.themeBlue)
             .background(Color.themeBlue.opacity(0.12))
-            .navigationTitle("Tasks")
+            .navigationTitle("Task Monster")
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Task Monster")
+                        .font(.custom("MONSTER", size: 28))
+                        .foregroundStyle(.primary)
+                        .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
+                }
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: { showManageCategories = true }) {
                         Label("Categories", systemImage: "folder")
@@ -150,14 +158,15 @@ struct TaskListView: View {
             .sheet(isPresented: $showManageCategories) {
                 ManageCategoriesView(viewModel: viewModel)
             }
+            .background(Color.themeBlue)
         }
     }
     
     private func color(for priority: TaskPriority) -> Color {
         switch priority {
-        case .high: return .themeYellow
-        case .medium: return .themeGreen
-        case .low: return .themeBlue
+        case .high: return .red
+        case .medium: return .themeYellow
+        case .low: return .themeGreen
         }
     }
 }

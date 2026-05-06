@@ -56,6 +56,8 @@ struct EditTaskView: View {
                     Toggle("Completed", isOn: $isCompleted)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.themeBlue)
             .background(Color.themeBlue.opacity(0.12))
             .tint(.themeGreen)
             .navigationTitle("Edit Task")
@@ -78,6 +80,7 @@ struct EditTaskView: View {
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
             }
+            .background(Color.themeBlue)
         }
     }
 }

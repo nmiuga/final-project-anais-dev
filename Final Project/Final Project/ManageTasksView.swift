@@ -50,6 +50,8 @@ struct ManageTasksView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.themeBlue)
             .background(Color.themeBlue.opacity(0.12))
             .navigationTitle("Manage Tasks")
             .toolbar {
@@ -70,6 +72,7 @@ struct ManageTasksView: View {
                     .tint(.themeYellow)
                 }
             }
+            .background(Color.themeBlue)
             .sheet(isPresented: $showAddTask) {
                 AddTaskView(viewModel: viewModel)
             }
@@ -149,11 +152,11 @@ struct TaskRowView: View {
 fileprivate func priorityColor(_ priority: TaskPriority) -> Color {
     switch priority {
     case .low:
-        return .themeBlue
-    case .medium:
         return .themeGreen
-    case .high:
+    case .medium:
         return .themeYellow
+    case .high:
+        return .red
     }
 }
 
@@ -164,3 +167,4 @@ struct ManageTasksView_Previews: PreviewProvider {
         ManageTasksView()
     }
 }
+
